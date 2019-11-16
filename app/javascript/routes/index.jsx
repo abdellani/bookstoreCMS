@@ -29,12 +29,12 @@ export default (
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Features
+                My Books
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Pricing
+                Profile
               </a>
             </li>
             <li className="nav-item">
@@ -48,7 +48,7 @@ export default (
               </a>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
+          <form className="form-inline my-2 my-lg-0 ml-auto">
             <input
               className="form-control mr-sm-2"
               type="search"
