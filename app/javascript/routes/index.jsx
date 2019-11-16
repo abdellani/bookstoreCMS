@@ -27,20 +27,52 @@ export default (
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                My Books
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                My books
               </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
+                  All my Books
+                </a>
+                <a className="dropdown-item" href="#">
+                  Add a new book
+                </a>
+              </div>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Profile
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                SignUp/Login
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Login
               </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
+                  Sign Up
+                </a>
+                <a className="dropdown-item" href="#">
+                  Login
+                </a>
+              </div>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
@@ -50,15 +82,12 @@ export default (
           </ul>
           <form className="form-inline my-2 my-lg-0 ml-auto">
             <input
-              className="form-control mr-sm-2"
+              className="form-control h-50 mr-sm-2 text-center"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
+            <button className="btn-sm btn-primary my-2 my-sm-0" type="submit">
               Search
             </button>
           </form>
