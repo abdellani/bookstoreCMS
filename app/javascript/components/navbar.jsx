@@ -22,6 +22,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import Logo from "../../assets/images/bookStoreLogo.png";
 
 const drawerWidth = 240;
 
@@ -120,8 +121,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "block"
+      display: "block",
+      marginLeft: 10,
+      color: "#FE882E"
     }
+  },
+  logo: {
+    height: 55,
+    margin: "0 auto"
   }
 }));
 
@@ -157,8 +164,9 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            BookSTORE
+          <img src={Logo} className={classes.logo} alt="" />
+          <Typography variant="h6" className={classes.title}>
+            BigBook
           </Typography>
           <div className="ml-auto">
             <div className={classes.search}>
