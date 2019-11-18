@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 class Books extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class Books extends React.Component {
         if (response.ok) {
           return response.json();
         }
-        throw new Error("Network response was not ok.");
+        throw new Error("Network response was not ok!");
       })
       .then(response => this.setState({ books: response }))
       .catch(() => this.props.history.push("/"));
