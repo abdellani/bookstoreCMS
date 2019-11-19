@@ -23,6 +23,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import Logo from "../../assets/images/bookStoreLogo.png";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -129,6 +130,13 @@ const useStyles = makeStyles(theme => ({
   logo: {
     height: 55,
     margin: "0 auto"
+  },
+  homepage: {
+    color: "#FE882E",
+    "&:hover": {
+      color: "#FE882E",
+      textDecoration: "none"
+    }
   }
 }));
 
@@ -166,7 +174,9 @@ export default function PersistentDrawerLeft() {
           </IconButton>
           <img src={Logo} className={classes.logo} alt="" />
           <Typography variant="h6" className={classes.title}>
-            BigBook
+            <Link to="/" className={classes.homepage}>
+              BookStore
+            </Link>
           </Typography>
           <div className="ml-auto">
             <div className={classes.search}>

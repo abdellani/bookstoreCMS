@@ -5,29 +5,26 @@ import CreateBook from "../components/books/create";
 import Navbar from "../components/navbar";
 import BookShow from "../components/books/show";
 import UpdateBook from "../components/books/edit";
+import CreateUser from "../components/users/create";
 
 export default (
   <div>
-    <div>
-      <Navbar />
-    </div>
+    <div></div>
     <div>
       <Router>
-        <Switch>
-          <Route path="/books" exact component={Book} />
-        </Switch>
+        <Navbar />
         <Switch>
           <Route path="/books/new" exact component={CreateBook} />
-        </Switch>
-        <Switch>
-          <Route path="/books/show/:id" exact component={BookShow} />
-        </Switch>
-        <Switch>
+          <Route path="/books/:id/show" exact component={BookShow} />
           <Route
-            path="/books/update/:id"
+            path="/books/:id/edit"
             exact
-            render={({ match,history }) => <UpdateBook match={match} history={history} />}
+            render={({ match, history }) => (
+              <UpdateBook match={match} history={history} />
+            )}
           ></Route>
+          <Route path="/users/new" exact component={CreateUser} />
+          <Route path="/" component={Book} />
         </Switch>
       </Router>
     </div>

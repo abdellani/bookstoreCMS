@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 class Books extends React.Component {
   constructor(props) {
@@ -24,7 +24,12 @@ class Books extends React.Component {
 
   render() {
     const { books } = this.state;
-    const bookTitles = books.map(book => <li key={book.id}>{book.title} <Link to={`books/show/${book.id}`}>show</Link></li>);
+    const bookTitles = books.map(book => (
+      <li key={book.id}>
+        {book.title} <Link to={`books/${book.id}/show`}>show</Link>
+        <Link to={`books/${book.id}/edit`}>edit</Link>
+      </li>
+    ));
     return <div>{bookTitles}</div>;
   }
 }

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
       resources :books, only: [:index, :create, :update, :show, :destroy]
+      resources :users, only: [:index, :create, :update, :show, :destroy]
   end
   
 

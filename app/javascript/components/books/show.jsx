@@ -6,7 +6,7 @@ const Book = props => {
   const [description, setDescription] = useState("description");
   const [ISBN, setISBN] = useState("ISBN");
   const [redirect, setRedirect] = useState(false);
-  let match = useRouteMatch("/books/show/:id");
+  let match = useRouteMatch("/books/:id/show");
   let url = `/api/books/${match.params.id}`;
 
   if (!redirect) {
@@ -45,7 +45,7 @@ const Book = props => {
   };
   return (
     <div>
-      {redirect && <Redirect to="/books"/>}
+      {redirect && <Redirect to="/books" />}
       {title}
       {description}
       {ISBN}
