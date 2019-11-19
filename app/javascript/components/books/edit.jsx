@@ -51,7 +51,7 @@ class UpdateBook extends Component {
         }
         throw new Error("Network response was not ok!");
       })
-      .then(response => console.log(response))
+      .then(response => this.props.history.push("/books"))
       .catch(() => this.props.history.push("/"));
   }
 

@@ -45,7 +45,7 @@ const Book = props => {
   };
   return (
     <div>
-      {redirect && <Redirect to="/books" />}
+      {redirect && <Redirect to="/books"/>}
       {title}
       {description}
       {ISBN}

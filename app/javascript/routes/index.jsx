@@ -26,7 +26,7 @@ export default (
           <Route
             path="/books/update/:id"
             exact
-            render={({ match }) => <UpdateBook match={match} />}
+            render={({ match,history }) => <UpdateBook match={match} history={history} />}
           ></Route>
         </Switch>
       </Router>

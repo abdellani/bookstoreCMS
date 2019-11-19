@@ -21,10 +21,10 @@ class Books extends React.Component {
     const url = "/api/books";
     fetch(url, {
       method: "POST",
-      headers: { 
-        "Content-Type": "application/json" 
+      headers: {
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state) 
+      body: JSON.stringify(this.state)
     })
       .then(response => {
         if (response.ok) {
@@ -32,21 +32,23 @@ class Books extends React.Component {
         }
         throw new Error("Network response was not ok!");
       })
-      .then(response => console.log(response))
+      .then(response => this.props.history.push("/books"))
       .catch(() => this.props.history.push("/"));
   }
 
   render() {
     let { title, description, author, ISBN } = this.state;
-    return <div>
-      <form>
-        <input id="title" value={title} onChange={(e) => this.handleChange(e)} />
-        <input id="description" value={description} onChange={(e) => this.handleChange(e)} />
-        <input id="author" value={author} onChange={(e) => this.handleChange(e)} />
-        <input id="ISBN" value={ISBN} onChange={(e) => this.handleChange(e)} />
-        <input type="submit" onClick={(e) => this.handleSubmit(e)} />
-      </form>
-    </div>;
-    }
+    return (
+      <div>
+        <form>
+          <input id="title" value={title} onChange={(e) => this.handleChange(e)} />
+          <input id="description" value={description} onChange={(e) => this.handleChange(e)} />
+          <input id="author" value={author} onChange={(e) => this.handleChange(e)} />
+          <input id="ISBN" value={ISBN} onChange={(e) => this.handleChange(e)} />
+          <input type="submit" onClick={(e) => this.handleSubmit(e)} />
+        </form>
+      </div>
+    );
   }
-  export default Books;
+}
+export default Books;

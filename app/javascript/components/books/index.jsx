@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 class Books extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Books extends React.Component {
 
   render() {
     const { books } = this.state;
-    const bookTitles = books.map(book => <li key={book.id}>{book.title}</li>);
+    const bookTitles = books.map(book => <li key={book.id}>{book.title} <Link to={`books/show/${book.id}`}>show</Link></li>);
     return <div>{bookTitles}</div>;
   }
 }
