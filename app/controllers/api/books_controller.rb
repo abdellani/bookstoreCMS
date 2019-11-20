@@ -5,32 +5,31 @@ class Api::BooksController < ApplicationController
   end
 
   def create
-    book=Book.new(book_params)
+    book = Book.new(book_params)
     if book.save
       render json: {
         status: 201,
-        book:book
+        book: book,
       }
     else
       render json: {
         status: 401,
-        errors: ['A problem occured when trying to save the new book']
+        errors: book.errors.messages,
       }
     end
   end
 
   def show
     book = Book.find(params[:id])
-
     if !book.nil?
       render json: {
         status: 200,
-        book: book
+        book: book,
       }
     else
       render json: {
         status: 401,
-        errors: ['A problem occured when trying to save the new book']
+        errors: ["A problem occured when trying to save the new book"],
       }
     end
   end
@@ -40,12 +39,12 @@ class Api::BooksController < ApplicationController
     if book.update_attributes(book_params)
       render json: {
         status: 202,
-        book: book
+        book: book,
       }
     else
       render json: {
         status: 401,
-        errors: ['A problem occured when trying to save the new book']
+        errors: ["A problem occured when trying to save the new book"],
       }
     end
   end
@@ -55,17 +54,19 @@ class Api::BooksController < ApplicationController
 
     if book.destroy
       render json: {
-        status: 200
+        status: 200,
       }
     else
       render json: {
         status: 401,
-        errors: ['A problem occured when trying to save the new book']
+        errors: ["A problem occured when trying to save the new book"],
       }
     end
   end
+
   private
-   def book_params
-      params.require(:book).permit(:title,:description,:ISBN,:link)
-   end
+
+  def book_params
+    params.require(:book).permit(:title, :description, :ISBN, :link)
+  end
 end

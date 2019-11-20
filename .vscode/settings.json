@@ -1,0 +1,5 @@
+{
+  "solargraph.checkGemVersion": false,
+  "solargraph.bundlerPath": "/home/user/.rbenv/versions/2.4.1/bin/bundle",
+  "solargraph.useBundler": true
+}

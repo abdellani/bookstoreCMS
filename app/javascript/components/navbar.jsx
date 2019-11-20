@@ -26,7 +26,42 @@ import Logo from "../../assets/images/bookStoreLogo.png";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-
+const isLoggedIn=()=>{
+      const url = "/api/logged_in";
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }}
+    ).then(
+      response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok!");
+      })
+      .then(response => console.log(response))
+      .catch((e) =>console.log(e));
+// this.props.history.push("/")
+}
+const logout=()=>{
+      const url = "/api/logout";
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }}
+    ).then(
+      response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok!");
+      })
+      .then(response => console.log(response))
+      .catch((e) =>console.log(e));
+// this.props.history.push("/")
+}
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
@@ -252,7 +287,13 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <LockOpenIcon />
             </ListItemIcon>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="Logout" onClick={()=>logout()} />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <LockOpenIcon />
+            </ListItemIcon>
+            <ListItemText primary="Is logged in ?" onClick={()=>isLoggedIn()} />
           </ListItem>
         </List>
       </Drawer>

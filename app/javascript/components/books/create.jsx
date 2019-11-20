@@ -24,7 +24,7 @@ class Books extends React.Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({ book: this.state })
     })
       .then(response => {
         if (response.ok) {

@@ -9,22 +9,13 @@ import {
   Button
 } from "@material-ui/core";
 
-class createUser extends Component {
+class createSession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
       email: "",
-      password: "",
-      password_confirmation: "",
-      role: "user"
+      password: ""
     };
-  }
-
-  handleChangeSelect(event) {
-    this.setState({
-      role: event.target.value
-    });
   }
 
   handleChange(event) {
@@ -35,7 +26,7 @@ class createUser extends Component {
 
   handleSumbit(e) {
     e.preventDefault();
-    const url = "/api/users";
+    const url = "/api/login";
     fetch(url, {
       method: "POST",
       headers: {
@@ -43,8 +34,7 @@ class createUser extends Component {
       },
       body: JSON.stringify(
         {
-        user:
-        this.state
+        user:this.state
       })
     })
       .then(response => {
@@ -54,7 +44,7 @@ class createUser extends Component {
         throw new Error("Network response was not ok!");
       })
       .then(response => console.log(response))
-      .catch(() => this.props.history.push("/"));
+      .catch((e) =>this.props.history.push("/"));
   }
   render() {
     return (
@@ -71,17 +61,7 @@ class createUser extends Component {
               Please enter valid Email address.
             </FormHelperText>
           </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="name">Full Name</InputLabel>
-            <Input
-              id="name"
-              aria-describedby="my-helper-text"
-              onChange={e => this.handleChange(e)}
-            />
-            <FormHelperText id="my-helper-text">
-              Please enter your full name.
-            </FormHelperText>
-          </FormControl>
+      
           <FormControl>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
@@ -93,31 +73,6 @@ class createUser extends Component {
             <FormHelperText id="my-helper-text">
               Please enter your password.
             </FormHelperText>
-          </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="password_confirmation">
-              Confirm Password
-            </InputLabel>
-            <Input
-              id="password_confirmation"
-              aria-describedby="my-helper-text"
-              onChange={e => this.handleChange(e)}
-              type="password"
-            />
-            <FormHelperText id="my-helper-text">
-              Please re-enter your password.
-            </FormHelperText>
-          </FormControl>
-          <FormControl>
-            <Select
-              id="role"
-              value={this.state.role}
-              onChange={e => this.handleChangeSelect(e)}
-            >
-              <MenuItem value="user">User</MenuItem>
-              <MenuItem value="author">Author</MenuItem>
-            </Select>
-            <FormHelperText id="my-helper-text">Select Role</FormHelperText>
           </FormControl>
           <Button
             variant="contained"
@@ -133,4 +88,4 @@ class createUser extends Component {
   }
 }
 
-export default createUser;
+export default createSession;

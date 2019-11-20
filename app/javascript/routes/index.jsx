@@ -6,14 +6,14 @@ import Navbar from "../components/navbar";
 import BookShow from "../components/books/show";
 import UpdateBook from "../components/books/edit";
 import CreateUser from "../components/users/create";
+import Login from "../components/sessions/create";
 
 export default (
   <div>
-    <div></div>
-    <div>
       <Router>
         <Navbar />
         <Switch>
+          <Route path="/Login" exact component={Login} />
           <Route path="/books/new" exact component={CreateBook} />
           <Route path="/books/:id/show" exact component={BookShow} />
           <Route
@@ -27,6 +27,5 @@ export default (
           <Route path="/" component={Book} />
         </Switch>
       </Router>
-    </div>
   </div>
 );
