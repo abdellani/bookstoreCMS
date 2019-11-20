@@ -1,0 +1,23 @@
+Session creation/destroy/checking -> in both fe & be
+Books create/edit/destroy/view -> in both fe & be
+User create/edit/destroy/view -> in be 
+User create -> in fe
+
+
+check login
+- before doing CRUD operation on Books
+- Before Deleting and update User 
+- Before editing the favorit book list
+- Before allowing a user adding a new review for a book
+- Before allowing a user before rating a book
+
+Book <-> User
+  User can be an author of a book 
+  A book can be in the list of favorit books of a user 
+  - User can mark a book as read
+  - A user can review a book
+
+Book <-> genere
+  A book might belong one or more genere
+User <-> genere 
+  A user may have a list of genere (for index page) 
