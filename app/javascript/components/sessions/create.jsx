@@ -8,6 +8,8 @@ import {
   MenuItem,
   Button
 } from "@material-ui/core";
+import { CHECK_LOGIN } from "../../actions"
+import { connect } from "react-redux"
 
 class createSession extends Component {
   constructor(props) {
@@ -43,8 +45,12 @@ class createSession extends Component {
         }
         throw new Error("Network response was not ok!");
       })
-      .then(response => console.log(response))
+      .then(response =>{
+        this.props.checkLogin() 
+        console.log(response)
+        })
       .catch((e) =>this.props.history.push("/"));
+      // .catch((e) =>this.props.history.push("/"));
   }
   render() {
     return (
@@ -88,4 +94,9 @@ class createSession extends Component {
   }
 }
 
-export default createSession;
+const mapDispatchToProps = (dispatch) => {
+  const checkLogin = () => dispatch(CHECK_LOGIN)
+  return { checkLogin }
+}
+
+export default connect(null, mapDispatchToProps)(createSession);

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux"
+import { CHECK_LOGIN } from "../../actions"
 
 class Books extends React.Component {
   constructor(props) {
@@ -16,8 +18,12 @@ class Books extends React.Component {
       [e.target.id]: e.target.value
     })
   }
+  
   handleSubmit(e) {
     e.preventDefault()
+    this.props.checkLogin()
+    return;
+    
     const url = "/api/books";
     fetch(url, {
       method: "POST",
@@ -51,4 +57,14 @@ class Books extends React.Component {
     );
   }
 }
-export default Books;
+
+const mapStoreToProps = (state) => {
+  let { loggedIn } = this.state
+  return { loggedIn }
+}
+const mapDispatchToProps = (dispatch) => {
+  const checkLogin = () => dispatch(CHECK_LOGIN)
+  return { checkLogin }
+}
+
+export default connect(null, mapDispatchToProps)(Books);

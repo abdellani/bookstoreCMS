@@ -1,9 +1,14 @@
 const initState = {
-  loggedin: false
+  loggedIn: false
 }
 
 const rootReducer = (state = initState, action) => {
-  return state
+  switch(action.type){
+    case "CHECK_LOGIN":
+      return {loggedIn:action.loggedIn}
+    default:
+        return state
+  }
 }
 
 export default rootReducer
