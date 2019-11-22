@@ -16,4 +16,9 @@ class ApplicationController < ActionController::Base
   def logout!
      session.clear
   end
+  def check_authorized
+    render json: {
+      code: 401
+    } unless logged_in?
+  end
 end

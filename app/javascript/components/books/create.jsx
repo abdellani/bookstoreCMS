@@ -20,7 +20,8 @@ class Books extends React.Component {
       description: "",
       author: "",
       genere: "test",
-      generes: ["test"]
+      generes: ["test"],
+      errors: []
     };
   }
 
@@ -44,28 +45,40 @@ class Books extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let bookParams = {title, ISBN,description, author, genere } = this.state 
     const url = "/api/books";
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ book: this.state })
+      body: JSON.stringify({ book: bookParams})
     })
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok!");
+        return response.json()
       })
-      .then(response => this.props.history.push("/books"))
+      .then(response => {
+        if(response.status == 201){
+          this.props.history.push("/")
+        }else if(response.status == 401){
+          this.props.history.push("/login")
+        }else if(response.status == 400){this.setState({errors: response.errors})
+        }else{
+          this.props.history.push("/")
+        }
+      })
       .catch(() => this.props.history.push("/"));
   }
 
   render() {
-    let { title, description, author, ISBN } = this.state;
+    let { title, description, author, ISBN,errors } = this.state;
+    
     return (
       <div>
+        {Object.entries(errors).length > 0  ? Object.entries(errors).forEach(
+          ([key,value])=>
+          <div>{key} -- {value}</div>
+        ) : null}
         <form>
           <FormControl>
             <InputLabel htmlFor="title">Book Title</InputLabel>

@@ -1,13 +1,16 @@
 class Api::BooksController < ApplicationController
+  before_action :check_authorized, only:[:index]
   def index
     books = Book.all
     render json: books
   end
 
   def create
+
     @genere = Genere.find_by_name(params[:book][:genere])
     book = Book.new(book_params)
     book.genere = @genere
+    book.user = current_user
     if book.save
       render json: {
         status: 201,
@@ -15,7 +18,7 @@ class Api::BooksController < ApplicationController
       }
     else
       render json: {
-        status: 401,
+        status: 400,
         errors: book.errors.messages,
       }
     end
@@ -69,6 +72,6 @@ class Api::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :description, :ISBN, :link)
+    params.require(:book).permit(:title, :description, :ISBN, :link, :author)
   end
 end
