@@ -16,6 +16,7 @@ class PrivateRoute extends Component {
         throw new Error("Network response was not ok!");
       })
       .then(response => {
+        console.log(response);
         this.setState({
           gotUnswerFromServer: true,
           isLogged: response.logged_in
@@ -23,6 +24,7 @@ class PrivateRoute extends Component {
       })
       .catch(e => this.props.history.push("/"));
   }
+
   render() {
     if (this.state.gotUnswerFromServer) {
       if (this.state.isLogged)

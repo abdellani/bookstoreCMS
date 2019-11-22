@@ -8,8 +8,8 @@ import {
   MenuItem,
   Button
 } from "@material-ui/core";
-import { CHECK_LOGIN } from "../../actions"
-import { connect } from "react-redux"
+import { CHECK_LOGIN } from "../../actions";
+import { connect } from "react-redux";
 
 class createSession extends Component {
   constructor(props) {
@@ -34,9 +34,8 @@ class createSession extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(
-        {
-        user:this.state
+      body: JSON.stringify({
+        user: this.state
       })
     })
       .then(response => {
@@ -45,12 +44,11 @@ class createSession extends Component {
         }
         throw new Error("Network response was not ok!");
       })
-      .then(response =>{
-        this.props.checkLogin() 
-        console.log(response)
-        })
-      .catch((e) =>this.props.history.push("/"));
-      // .catch((e) =>this.props.history.push("/"));
+      .then(response => {
+        console.log(response);
+        this.props.checkLogin();
+      })
+      .catch(e => this.props.history.push("/"));
   }
   render() {
     return (
@@ -67,7 +65,7 @@ class createSession extends Component {
               Please enter valid Email address.
             </FormHelperText>
           </FormControl>
-      
+
           <FormControl>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
@@ -94,9 +92,9 @@ class createSession extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  const checkLogin = () => dispatch(CHECK_LOGIN)
-  return { checkLogin }
-}
+const mapDispatchToProps = dispatch => {
+  const checkLogin = () => dispatch(CHECK_LOGIN);
+  return { checkLogin };
+};
 
 export default connect(null, mapDispatchToProps)(createSession);

@@ -5,7 +5,9 @@ class Api::BooksController < ApplicationController
   end
 
   def create
+    @genere = Genere.find_by_name(params[:book][:genere])
     book = Book.new(book_params)
+    book.genere = @genere
     if book.save
       render json: {
         status: 201,

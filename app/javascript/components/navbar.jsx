@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
+import Collapse from "@material-ui/core/Collapse";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -25,43 +26,49 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import Logo from "../../assets/images/bookStoreLogo.png";
 import { Link } from "react-router-dom";
 
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
+import AddIcon from "@material-ui/icons/Add";
+import TocIcon from "@material-ui/icons/Toc";
+
 const drawerWidth = 240;
-const isLoggedIn=()=>{
-      const url = "/api/logged_in";
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }}
-    ).then(
-      response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok!");
-      })
-      .then(response => console.log(response))
-      .catch((e) =>console.log(e));
-// this.props.history.push("/")
-}
-const logout=()=>{
-      const url = "/api/logout";
-    fetch(url, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }}
-    ).then(
-      response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok!");
-      })
-      .then(response => console.log(response))
-      .catch((e) =>console.log(e));
-// this.props.history.push("/")
-}
+const isLoggedIn = () => {
+  const url = "/api/logged_in";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Network response was not ok!");
+    })
+    .then(response => console.log(response))
+    .catch(e => console.log(e));
+  // this.props.history.push("/")
+};
+const logout = () => {
+  const url = "/api/logout";
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Network response was not ok!");
+    })
+    .then(response => console.log(response))
+    .catch(e => console.log(e));
+  // this.props.history.push("/")
+};
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
@@ -172,6 +179,9 @@ const useStyles = makeStyles(theme => ({
       color: "#FE882E",
       textDecoration: "none"
     }
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
   }
 }));
 
@@ -179,6 +189,7 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [openBooks, setOpenBooks] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -186,6 +197,10 @@ export default function PersistentDrawerLeft() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleBooksOpen = () => {
+    setOpenBooks(!openBooks);
   };
 
   return (
@@ -250,18 +265,46 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button component="a" href="/">
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={handleBooksOpen}>
             <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
-            <ListItemText primary="MyBooks" />
+            <ListItemText primary="Books" />
+            {openBooks ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
+          <Collapse in={openBooks} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Favorite Books" />
+              </ListItem>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <TocIcon />
+                </ListItemIcon>
+                <ListItemText primary="Published Books" />
+              </ListItem>
+              <ListItem
+                button
+                className={classes.nested}
+                component="a"
+                href="/books/new"
+              >
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Publish a Book" />
+              </ListItem>
+            </List>
+          </Collapse>
           <ListItem button>
             <ListItemIcon>
               <PersonIcon />
@@ -271,13 +314,13 @@ export default function PersistentDrawerLeft() {
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button component="a" href="/users/new">
             <ListItemIcon>
               <VpnKeyIcon />
             </ListItemIcon>
             <ListItemText primary="Sign Up" />
           </ListItem>
-          <ListItem button>
+          <ListItem button component="a" href="/login">
             <ListItemIcon>
               <LockOpenIcon />
             </ListItemIcon>
@@ -287,13 +330,16 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <LockOpenIcon />
             </ListItemIcon>
-            <ListItemText primary="Logout" onClick={()=>logout()} />
+            <ListItemText primary="Logout" onClick={() => logout()} />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <LockOpenIcon />
             </ListItemIcon>
-            <ListItemText primary="Is logged in ?" onClick={()=>isLoggedIn()} />
+            <ListItemText
+              primary="Is logged in ?"
+              onClick={() => isLoggedIn()}
+            />
           </ListItem>
         </List>
       </Drawer>
